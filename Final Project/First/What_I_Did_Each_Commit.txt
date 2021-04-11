@@ -1,0 +1,47 @@
+# Day 1 -----------------------------------------------------------------------------------------
+# Created some end points for the api (creating a user, deleting a user, updating a user)
+# I also created some endpoints that would create the user in the database and the other CRUDs 
+# Made sure that the database worked good with the code and i didn't receive any errors
+# the errors that I did get, i made sure to fix them right away.
+# Update function in browser (not database):
+# decided to create a for statement that will find the matching id that was provided by the user
+# and update the information once the for loop finds that specified user. I also did the same
+# for the delete user.
+# Day 2 -----------------------------------------------------------------------------------------
+# Added more endpoints to the code. the firsts ones being the update and delete for the database 
+# For the delete endpoint they must provide the id of the user as well for the update one
+# Created the the database for the movies, created 10 fields for the movies and 1 for the friendid
+# the friend ID must be provided. The first route for the movies will be to add movies to the user
+# created POST that will ask for the friendid and then the movies that they want to add. if they 
+# don't provided names for the rest of the fields (ex. 1-3: movies, 4-10: no movies provided)
+# then it will fill the fields with "none". I then created two more 'GET' endpoints that will 
+# display the infomration from the table in json form on the web. the first one will display
+# all of the information from the table. Then the second 'GET' will show a specified user movies
+# only. Lastly I created the endpoints to select a random movie from the database. First I created
+# a 'POST' endpoint that will ask for the 'friendid' of the users that were selected. So if users
+# (1,2,4) were selected then it would be {"user1": 1, "user2": 2, "user3": 4} this will be sent
+# through postman. After that I created some loops that would create a list with the users ID only
+# then it would convert it into a string ("1,2,4"). After that the string will be sent to the 
+# database in a one line database. The last endpoint is where is the random movie is picked
+# When you enter "127.0.0.1:5000/api/movies/randompick" it will display the result. This works
+# by firstly taking the single string data ("1,2,4") from the database and inserting into a query
+# that asks the table with all of the movies to "SELECT * from movieslist where ID in (1,2,4)' 
+# returning only the rows from those with the ids specified. After that I created a loop that 
+# run through all of the rows provided and insert all of the movies that were selcted into a 
+# list. I used an if statement in order to not insert the "none" responses for the fields that 
+# have no movies. I also imported the random module in order to select a random number from 
+# the range of 0 and the length of the list with the movies
+# Day 3 -----------------------------------------------------------------------------------------
+# removed unecessary code that didn't affect the rest of the code
+# then i added the comments to describe the code and make it easier to understand why i did
+# certain things. Changed the name of certain list in order for them to make more sense, since they
+# were used for different things before
+# Day 4 (final) ---------------------------------------------------------------------------------
+# Removed more code that was not neccessary for the project
+# Then For my last two endpoints which were for the movie selection, instead of having
+# two, I combined them into one and made it much more easier to use. So now if i want to choose
+# my users I first go to postman then i insert the body that is needed to select the users i want
+# after that it we go to the same url that I just on it for post and it returns the result for the users
+# that i picked. I used this https://stackoverflow.com/questions/42018603/handling-get-and-post-in-same-flask-view
+# as a refrence to combine the GET and POST methods into one making much easier to read and run.
+# -----------------------------------------------------------------------------------------------
