@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div>
+            <form action="process_form" method="post">
+                <h2>Please sign in</h2>
+                <input type="text" id="fname" name="fname" class="form-control" placeholder="fname" required
+                    autofocus>
+                <input type="text" name="lname" id="lname" class="form-control" placeholder="lname"
+                    required>
+                <div class="checkbox">
+                    <label>
+                        <input name="remember-me" type="checkbox"> Remember me
+                    </label>
+                </div>
+                <input class="btn btn-lg btn-primary btn-block" type="submit">
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>
