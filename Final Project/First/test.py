@@ -30,10 +30,11 @@ print(json.loads(y))
 fen = {}
 x = 0
 count = 0
-# for user in test:
-#    print(test[x]['firstname'])
-#    x = x + 1
-#    count = count + 1
-#    user = "user%s" % (x)
-#    fen[user].append(test[x]['id'])
-#   print(fen) 
+for user in test:
+    print(test[x]['firstname'])
+    x = x + 1
+    count = count + 1
+    user = "user%s" % (x)
+    
+    fen[user].append(test[x]['id'])
+    print(fen) 
