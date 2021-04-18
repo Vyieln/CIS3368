@@ -1,0 +1,65 @@
+Instructions for input formats
+
+route('/')
+    - Take you to the home page
+
+route('api/friends/all')
+    - will show you all of the users that are in the table friends (json format)
+
+route('api/friends)
+    - must use ex: ?id=1 at the end of url
+        - example: 127.0.0.1:5000/api/friends?id=1
+    - will show you the information for the specified user
+
+route('/api/db/adduser')
+    - POST method, so must insert data using POSTMAN
+        - format : {"fname": "first_name", "lname": "last_name"}
+            - example: {"fname": "Alex" , "lname": "Arredondo"}
+    - This will insert a user into the database
+    - Must provide a first name
+    - No need to provide last name
+
+route('/api/deleteuser')
+    - DELETE method, must insert USER id using POSTMAN
+        - format: {"id": x}
+            - example: {"id": 2}
+    - Will delete user from database given the id 
+
+route('/api/updateuser')
+    - UPDATE method, must insert USER id and Firstname and/or lastname using POSTMAN
+        - format: {"id": x, "fname": "name", "lname": "name"}
+            - example: {"id": 1, "fname": "Alex", "lname": "Arredondo"}
+    - Will update information given id and new information 
+
+route('/api/movies/add)
+    - POST method, must insert USER id and movies using POSTMAN
+        - id from users can be seen using the route('api/friends/all')
+        - format: {"fid": x, "movie1" : "name", "movie2" : "name", "movie3" : "name", "movie4" : "name", "movie5" : "name", "movie6" : "name", "movie7" : "name", "movie8" : "name", "movie9" : "name","movie10" : "name"}
+            - example: {"fid": 1, "movie1" : "Cars", "movie2" : "Nemo", "movie3" : "Avengers", "movie4" : "Harry_Potter", "movie5" : "James_Bond", "movie6" : "Justice_League", "movie7" : "Spider-Man", "movie8" : "Scary_Movie", "movie9" : "Zootopia","movie10" : "Godzilla"}
+    - The user does not have to input all 10 movies if they want 
+
+route('/api/movies/all')
+    - will show all of the users and their selected movies
+
+route('/api/movies')
+    - must use ex: ?id=1 at the end of url
+        - ex: 127.0.0.1:5000/api/movies?id=1
+    - will show you the movies selection for the specified user
+
+route('/api/movies/random')
+    - POST AND GET method
+    - FIRST the user must insert the users (using their corresponding from the first table) that they want to selected
+        - USING POSTMAN, in the body insert the number of users that are going to be select and then the users ids
+            - format: {"num" : x, "user1": y, : "user2": y}
+                - example: {"num" : 2, "user1": 1, "user2": 3}
+            - "num" is the number of users that will be selected
+                - so if you want 5 users selected you input 5
+            - For every added user you increase the number after "user(x)"
+                - if you selected 4 users it will be:
+                    - {"num": 4, "user1": 1, "user2": 2, "user3": 3, "user4": 4}
+            - x = number of users
+            - y = id for the user selected
+    - SECOND part you need to go the url 127.0.01:5000/api/movies/random
+        - It will show a random movies selected
+        - if you want a movie from the same users just refresh the page
+

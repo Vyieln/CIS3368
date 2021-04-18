@@ -2,7 +2,7 @@ import datetime
 import time
 import flask
 from flask import jsonify
-from flask import request, make_response
+from flask import request, make_response, render_template
 import mysql.connector
 from mysql.connector import Error
 import random
