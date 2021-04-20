@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div>
+            <h1> test</h1>
+            <% if (locals.user) { %>
+            <form action="random_form" method="post">
+                <% locals.user.forEach(function(mascot) { %>
+                    <div>
+                        <div><%= mascot.firstname %></div>
+                        <input type="checkbox" name=<%=mascot.id %>>
+                    </div>
+                <% }); %>
+                <input class="btn btn-lg btn-primary btn-block" type="submit">
+            </form>
+            <%}%>
+        </div>
+
+        <div>
+            <% if (locals.movie) { %>
+                <h1> <%= movie %></h1>
+            <%}%>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

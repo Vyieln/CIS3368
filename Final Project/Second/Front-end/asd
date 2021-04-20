@@ -39,21 +39,27 @@ app.get('/user', function(req, res){
 
 // about page
 
-
+app.get('/randompick', function(req, res) {
+    
+    //get multiple service calls and combine the results in 1 function
+   
+    //use res.render to load up an ejs view file
+    res.render('pages/randompick', {
+    });
+});
 // examples page 
 app.get('/examples', function(req, res) {
 
     
     res.render("pages/examples");
 });
-
-
+//TESTING
 app.get('/test', function(req, res) {
     // this will render our new example spage 
     res.render("pages/test");
 });
 
-//form  add user
+// CREATE A USER
 app.post('/process_form', function(req, res){
     // create a variable to hold the username parsed from the request body
     var username = req.body.fname
@@ -73,30 +79,14 @@ app.post('/process_form', function(req, res){
     
     res.render('pages/thanks.ejs', {body: req.body})
   
-});
-
-// loads the randompick page
-app.get('/randompick', function(req, res) {
-    // this will render our new example spage 
-    axios.get(`http://127.0.0.1:5000/api/friends/all`)
-    .then((response) => {  
-  
-    var friend = response.data;
-
-    //use res.render to load up an ejs view file
-    res.render('pages/randompick', {
-        user: friend
-    });
-    })
-    .catch(error => console.log(error)); 
-});
-
-// Form that takes the data from the checkboxes for selecting users
+})
+// SENDS DATA SELCTION OF USERS THAT WANT TO BE PICKED
 app.post('/random_form', function(req, res){
     // create a variable to hold the username parsed from the request body
     var selection = req.body
     console.log(JSON.stringify(selection))
     // print variable username to console
+    
     console.log(JSON.stringify(req.body));
     fetch('http://127.0.0.1:5000/api/movies/random', { method: 'POST', headers: {'Content-Type':'application/json; charset=utf-8'}, body: JSON.stringify(req.body)})
     .then(function (res) {
@@ -106,13 +96,24 @@ app.post('/random_form', function(req, res){
     .then(data => console.log(JSON.stringify(req.body)))
     .catch(error => console.log('ERROR'))
  
-    
-    res.render('pages/thanks.ejs', {body: req.body})
+    // RECEIVE THE MOVIES
+    axios.get(`http://127.0.0.1:5000/api/movies/random`)
+    .then((response) => {  
   
-});
+    var selected = response.data;
+
+    //use res.render to load up an ejs view file
+    res.render('pages/randompick', {
+        movie: selected
+    });
+    })
+    .catch(error => console.log(error)); 
+  
+})
 
 
-// add user page loads it up
+// SHOWS THE LIST OF FRIENDS AND LETS USER SELECT MOVIES
+
 app.get('/about', function(req, res) {
     
     //get multiple service calls and combine the results in 1 function
@@ -131,7 +132,8 @@ app.get('/about', function(req, res) {
     .catch(error => console.log(error)); 
 });
 
-//  takes the data from teh add movies 
+
+// ADD MOVIES
 app.post('/processdynamicform', function(req, res){
     //go directly to thanks.ejs and show dynamic checkbox selection
     console.log(JSON.stringify(req.body))
@@ -148,7 +150,7 @@ app.post('/processdynamicform', function(req, res){
     .catch(error => console.log('ERROR'))
     res.render('pages/thanks.ejs', {body: req.body})
   
-});
+  });
 
 app.listen(8080);
 console.log('8080 is the magic port');

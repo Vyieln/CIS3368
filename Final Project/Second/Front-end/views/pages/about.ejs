@@ -10,21 +10,24 @@
 </header>
 
 <main>
-<div class="row">
-    <div class="col-sm-8">
-        <div class="jumbotron">
-            <h1>This is great</h1>
-            <p>Welcome to templating using EJS</p>
-        </div>
-    </div>
+    <form action="/processdynamicform" method="post" class="jumbotron">
 
-    <div class="col-sm-4">
-        <div class="well">
-            <h3>Look I'm A Sidebar!</h3>
-        </div>
-    </div>
+                <% if (locals.user) { %>
+                    <select name="users"> 
+                    <% locals.user.forEach(function(car) { %>
+                        <option value="<%=car.id%>"> <%= car.firstname + " " + car.lastname%>  </option>
+                    <% }); %>
+                </select>
+                <% } %>
+                <% for(var i=1; i <=10; i++) { %>
+                    <br>
+                    <p>Movie <%=i%></p>  <input type="text" id="movie<%=i%>" name="Movie" class="form-control" placeholder="Username"
+                    autofocus> 
+                <%}%>
 
-</div>
+                <input class="btn btn-lg btn-primary btn-block" type="submit">
+           
+</form>
 </main>
 
 <footer>
