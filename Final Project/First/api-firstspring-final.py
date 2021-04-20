@@ -227,8 +227,19 @@ def usermovies():
         contact_list.append(id)
     contacts_from_user = (contact_list[-1] + 1)
     
+    json = {}
+    pre_data = request.get_json() 
+    json["fid"] = pre_data["users"]
+    sd = ""
+    y = 1
+    for x in pre_data["Movie"]:
+        if (x != ""):
+            sd = "movie%s" % (y)
+            json[sd] = x
+            y = y + 1
+    
     # request data given by the user from POSTMAN
-    request_data = request.get_json()
+    request_data = json
 
     # Requires the friend id / user id to be given 
     # then it allows the users to be input the movies that the want to add all the way up to 10
@@ -344,10 +355,20 @@ def user_movies():
 def movie_selection():
     connection = create_connection("cis3368.cba7r5iszeox.us-east-2.rds.amazonaws.com", "admin", "PogPogAnthony124", "CIS3368db")
     if flask.request.method == 'POST':
-        ids = [] # list for the ids provided
+         # list for the ids provided
 
         # request data needed for the query
         request_data = request.get_json()
+        data = list(request_data)
+        norm_str =""
+        for num in data:
+            if num == data[-1]:
+                g = "%s" % (num)
+                norm_str += g
+            else:
+                g = "%s," % (num)
+                norm_str += g
+        """
         num_users = request_data['num'] # number of user that are going to be used
 
         # while loop that uses the number given (which is the amount of user that are going to be used)
@@ -377,6 +398,7 @@ def movie_selection():
             else: 
                 norm_str += str(ids[x-1])
             x = x + 1
+        """
     
         # creates the connection with the AWS database
         connection = create_connection("cis3368.cba7r5iszeox.us-east-2.rds.amazonaws.com", "admin", "PogPogAnthony124", "CIS3368db")
