@@ -8,9 +8,10 @@
 <header>
     <%- include('../partials/header'); %>
 </header>
-<%- include('../partials/tabs/tab_user'); %>
+
 <main>
-    <h1> Delete User</h1>
+  <%- include('../partials/tabs/tab_movie'); %>
+  <h1> Delete Movie</h1>
     <form action="/processdynamicform" method="post" class="jumbotron">
 
                 <% if (locals.user) { %>

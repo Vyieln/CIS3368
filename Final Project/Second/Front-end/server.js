@@ -28,25 +28,31 @@ app.get('/', function(req, res) {
     });
 });
 
-app.get('/user', function(req, res){
+// home page
+app.get('/home', function(req, res){
     var tagline = "Add Users! Enter Movies! Receive your random pick!";
-    res.render('pages/user',
+    res.render('pages/home',
     {
         tagline: tagline
     });
 
 });
 
-// about page
 
-
-// examples page 
-app.get('/examples', function(req, res) {
-
-    
-    res.render("pages/examples");
+// USER POINTS
+// add user page
+app.get('/useradd', function(req, res) {
+    res.render("pages/useradd");
 });
 
+app.get('/userupdate', function(req, res) {
+    res.render("pages/userupdate");
+});
+
+app.get('/userdelete', function(req, res) {
+    res.render("pages/userdelete");
+});
+// USER POINTS END
 
 app.get('/test', function(req, res) {
     // this will render our new example spage 
@@ -75,6 +81,7 @@ app.post('/process_form', function(req, res){
   
 });
 
+// RANDOM PICK POINTS START
 // loads the randompick page
 app.get('/randompick', function(req, res) {
     // this will render our new example spage 
@@ -90,6 +97,22 @@ app.get('/randompick', function(req, res) {
     })
     .catch(error => console.log(error)); 
 });
+
+app.get('/randselec', function(req, res) {
+    // this will render our new example spage 
+    axios.get(`http://127.0.0.1:5000/api/friends/all`)
+    .then((response) => {  
+  
+    var friend = response.data;
+
+    //use res.render to load up an ejs view file
+    res.render('pages/randselec', {
+        user: friend
+    });
+    })
+    .catch(error => console.log(error)); 
+});
+
 
 // Form that takes the data from the checkboxes for selecting users
 app.post('/random_form', function(req, res){
@@ -112,8 +135,12 @@ app.post('/random_form', function(req, res){
 });
 
 
+// RANDOM PICK POINTS END
+
+
+// MOVIE POINTS START
 // add user page loads it up
-app.get('/about', function(req, res) {
+app.get('/movieadd', function(req, res) {
     
     //get multiple service calls and combine the results in 1 function
     axios.get(`http://127.0.0.1:5000/api/friends/all`)
@@ -123,7 +150,41 @@ app.get('/about', function(req, res) {
     var tagline = "Here is the data coming from my own API";
 
     //use res.render to load up an ejs view file
-    res.render('pages/about', {
+    res.render('pages/movieadd', {
+        user: friend,
+        tagline: tagline,
+    });
+    })
+    .catch(error => console.log(error)); 
+});
+app.get('/movieupdate', function(req, res) {
+    
+    //get multiple service calls and combine the results in 1 function
+    axios.get(`http://127.0.0.1:5000/api/friends/all`)
+    .then((response) => {  
+  
+    var friend = response.data;
+    var tagline = "Here is the data coming from my own API";
+
+    //use res.render to load up an ejs view file
+    res.render('pages/movieupdate', {
+        user: friend,
+        tagline: tagline,
+    });
+    })
+    .catch(error => console.log(error)); 
+});
+app.get('/moviedelete', function(req, res) {
+    
+    //get multiple service calls and combine the results in 1 function
+    axios.get(`http://127.0.0.1:5000/api/friends/all`)
+    .then((response) => {  
+  
+    var friend = response.data;
+    var tagline = "Here is the data coming from my own API";
+
+    //use res.render to load up an ejs view file
+    res.render('pages/moviedelete', {
         user: friend,
         tagline: tagline,
     });
@@ -131,6 +192,9 @@ app.get('/about', function(req, res) {
     .catch(error => console.log(error)); 
 });
 
+
+
+//MOVIE POINTS END
 //  takes the data from teh add movies 
 app.post('/processdynamicform', function(req, res){
     //go directly to thanks.ejs and show dynamic checkbox selection

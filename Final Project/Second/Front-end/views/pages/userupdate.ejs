@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+<%- include('../partials/tabs/tab_user'); %>
+<main>
+    <h1> Update User</h1>
+    <form action="/processdynamicform" method="post" class="jumbotron">
+
+                <% if (locals.user) { %>
+                    <select name="users"> 
+                    <% locals.user.forEach(function(car) { %>
+                        <option value="<%=car.id%>"> <%= car.firstname + " " + car.lastname%>  </option>
+                    <% }); %>
+                </select>
+                <% } %>
+                <% for(var i=1; i <=10; i++) { %>
+                    <br>
+                    <p>Movie <%=i%></p>  <input type="text" id="movie<%=i%>" name="Movie" class="form-control" placeholder="Username"
+                    autofocus> 
+                <%}%>
+
+                <input class="btn btn-lg btn-primary btn-block" type="submit">
+           
+</form>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
